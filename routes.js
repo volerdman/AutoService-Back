@@ -32,7 +32,7 @@ module.exports = function(app, db) {
         let product = await db.Models.Service.update({
             url: object.url,
             category: object.category,
-            name: object.url,
+            name: object.name,
             description: object.description,
             price: object.price
         }, {
