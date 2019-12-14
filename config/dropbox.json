@@ -1,0 +1,4 @@
+{
+
+    "redirect_uri": "http://localhost:4200/dropbox/auth"
+}
