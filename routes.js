@@ -30,9 +30,20 @@ module.exports = function (app, db) {
         }),
 
         app.post('/services', async (req, res) => {
-            let services = await db.Models.Service.findAll();
-            res.send(services);
-        });
+            let object = convertToObj(req.body);
+        object = object.data;
+        if (object == null || object.findText == null) object = {findText: ''};
+        let services = await db.sequelize.query(`SELECT * FROM searchInServices('${object.findText}');`);
+        res.send(services[0]);
+    });
+
+        app.post('/category', async (req, res) => {
+            let object = convertToObj(req.body);
+            object = object.data;
+            if (object == null || object.findText == null) object = {findText: ''};
+            let services = await db.sequelize.query(`SELECT * FROM searchInServices('${object.findText}');`);
+            res.send(services[0]);
+        });	    
 
     app.post('/login', async (req, res) => {
         let object = convertToObj(req.body);
